@@ -159,6 +159,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       >
     </div>
     <form name="contact" action="/" method="POST" data-netlify="true">
+      {/* <input type="hidden" name="form-name" value="contact"> */}
       <div class="input-label-group first-name">
         <label for="first-name">First name*</label>
         <input type="text" name="first-name" id="first-name" required />
@@ -231,7 +232,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     });
   }
 
-  const inputArr = document.querySelectorAll("form input, form textarea");
+  const inputArr = document.querySelectorAll(
+    "form input:not([type='hidden']), form textarea"
+  );
 
   for (let i = 0; i < inputArr.length; i++) {
     fancyLabel(inputArr[i].id);
