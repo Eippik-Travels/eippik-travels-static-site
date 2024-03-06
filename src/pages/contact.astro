@@ -7,8 +7,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     display: grid;
     gap: 1rem;
     grid-template-areas:
-      "fna"
-      "lna"
+      "nam"
       "eml"
       "phn"
       "str"
@@ -20,8 +19,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     @media (min-width: 390px) {
       grid-template-columns: repeat(2, 1fr);
       grid-template-areas:
-        "fna fna"
-        "lna lna"
+        "nam nam"
         "eml eml"
         "phn phn"
         "str nts"
@@ -31,14 +29,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }
 
     @media (min-width: 600px) {
-      grid-template-columns: repeat(6, 1fr);
+      /* grid-template-columns: repeat(6, 1fr); */
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
       grid-template-areas:
-        "fna fna fna lna lna lna"
+        "nam nam nam nam nam nam"
         "eml eml eml eml phn phn"
-        "str str str nts nts nts"
+        "str str nts nts nts nts"
         "grp grp grp grp grp grp"
         "dsc dsc dsc dsc dsc dsc"
-        " .  btn btn btn btn  . ";
+        "btn btn btn btn btn btn";
     }
   }
 
@@ -102,12 +101,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }
   }
 
-  .first-name {
-    grid-area: fna;
-  }
-
-  .last-name {
-    grid-area: lna;
+  .name {
+    grid-area: nam;
   }
 
   .email {
@@ -159,15 +154,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         ><em>Note, this form currently does <b>NOTHING</b>...</em></small
       >
     </div>
-    <form name="contact" action="/" method="POST" data-netlify="true">
+    <form name="contact" action="/success" method="POST" data-netlify="true">
       {/* <input type="hidden" name="form-name" value="contact"> */}
-      <div class="input-label-group first-name">
-        <label for="first-name">First name*</label>
-        <input type="text" name="first-name" id="first-name" required />
-      </div>
-      <div class="input-label-group last-name">
-        <label for="last-name">Last name*</label>
-        <input type="text" name="last-name" id="last-name" required />
+      <div class="input-label-group name">
+        <label for="name">Name*</label>
+        <input type="text" name="name" id="name" required />
       </div>
       <div class="input-label-group email">
         <label for="email">Email*</label>
