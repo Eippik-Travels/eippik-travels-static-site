@@ -8,6 +8,10 @@ export default {
       fontFamily: {
         sans: ["Poppins", ...defaultTheme.fontFamily.sans],
       },
+      colors: {
+        "fc-dark": "#22232A",
+        "fc-light": "#545769",
+      },
     },
   },
   plugins: [],

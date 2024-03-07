@@ -1,0 +1,58 @@
+---
+import { Image } from "astro:assets";
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// import kippHeadshot from "../images/Grover_Headshot.webp";
+import kippHeadshot from "../images/Kipp.jpg";
+---
+
+<style>
+  section {
+    display: grid;
+    gap: 1rem 2rem;
+    grid-template-columns: 1fr;
+
+    @media (min-width: theme("screens.md")) {
+      grid-template-columns: 1fr 1.2fr;
+      align-items: center;
+    }
+  }
+
+  p:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+</style>
+
+<BaseLayout title="" description="">
+  <section class="mx-auto w-[min(100%,_820px)]">
+    <h1 class="mt-4 text-4xl font-bold md:col-start-2 md:text-left">
+      Hi, I'm Kipp!
+    </h1>
+    <Image
+      class="mx-auto w-[min(100%,_500px)] rounded-xl shadow-lg md:row-start-1 md:row-span-2"
+      src={kippHeadshot}
+      widths={[600, kippHeadshot.width]}
+      sizes={`(max-width: 599px) 600px, (min-width: 600px) ${kippHeadshot.width}px`}
+      alt="Kipp's smiling face."
+    />
+    <div class="md:text-lg text-fc-light">
+      <p>
+        Welcome to Eippik Travels LLC, your one-stop destination for all your
+        travel needs.
+      </p>
+      <p>
+        I am an independent and experienced travel agent, dedicated to helping
+        you plan and book the perfect vacations. Whether you're looking for a
+        family vacation, a romantic getaway, or a group trip, I have the
+        knowledge and expertise to make it happen.
+      </p>
+      <p>
+        My goal is provide personalized service and attention to detail to
+        ensure that your travel experience is seamless, enjoyable, and
+        stress-free. Let me take care of the planning and details, so you can
+        relax and make travel memories that will last a lifetime.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
