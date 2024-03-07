@@ -1,10 +1,17 @@
 ---
-import { Image } from "astro:assets";
+import { Image, getImage } from "astro:assets";
 
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 // import kippHeadshot from "../images/Grover_Headshot.webp";
-import kippHeadshot from "../images/Kipp.jpg";
+import kippOrig from "../images/Kipp.jpg";
+
+const kippOpt = await getImage({
+  src: kippOrig,
+  format: "webp",
+  width: 600,
+  height: 750,
+});
 ---
 
 <style>
@@ -25,16 +32,27 @@ import kippHeadshot from "../images/Kipp.jpg";
 </style>
 
 <BaseLayout title="" description="">
+  {/* Image preloads: */}
+  <link slot="head" rel="preload" as="image" href={kippOpt.src} />
+
   <section class="mx-auto w-[min(100%,_820px)]">
     <h1 class="mt-4 text-4xl font-bold md:col-start-2 md:text-left">
       Hi, I'm Kipp!
     </h1>
-    <Image
+    <!-- <Image
       class="mx-auto w-[min(100%,_500px)] rounded-xl shadow-lg md:row-start-1 md:row-span-2"
       src={kippHeadshot}
       widths={[600, kippHeadshot.width]}
       sizes={`(max-width: 599px) 600px, (min-width: 600px) ${kippHeadshot.width}px`}
       alt="Kipp's smiling face."
+    /> -->
+    <Image
+      class="mx-auto w-[min(100%,_500px)] rounded-xl shadow-lg md:row-start-1 md:row-span-2"
+      src={kippOpt.src}
+      alt="Kipp's smiling face."
+      width={kippOpt.attributes.width}
+      height={kippOpt.attributes.height}
+      loading="eager"
     />
     <div class="md:text-lg text-fc-light">
       <p>
