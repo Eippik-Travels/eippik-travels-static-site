@@ -35,17 +35,10 @@ const kippOpt = await getImage({
   {/* Image preloads: */}
   <link slot="head" rel="preload" as="image" href={kippOpt.src} />
 
-  <section class="mx-auto w-[min(100%,_820px)]">
+  <section class="mx-auto md:mt-8 w-[min(100%,_820px)]">
     <h1 class="mt-4 text-4xl font-bold md:col-start-2 md:text-left">
       Hi, I'm Kipp!
     </h1>
-    <!-- <Image
-      class="mx-auto w-[min(100%,_500px)] rounded-xl shadow-lg md:row-start-1 md:row-span-2"
-      src={kippHeadshot}
-      widths={[600, kippHeadshot.width]}
-      sizes={`(max-width: 599px) 600px, (min-width: 600px) ${kippHeadshot.width}px`}
-      alt="Kipp's smiling face."
-    /> -->
     <Image
       class="mx-auto w-[min(100%,_500px)] rounded-xl shadow-lg md:row-start-1 md:row-span-2"
       src={kippOpt.src}
@@ -54,7 +47,7 @@ const kippOpt = await getImage({
       height={kippOpt.attributes.height}
       loading="eager"
     />
-    <div class="md:text-lg text-fc-light">
+    <div class="md:text-base text-fc-light">
       <p>
         Welcome to Eippik Travels LLC, your one-stop destination for all your
         travel needs.

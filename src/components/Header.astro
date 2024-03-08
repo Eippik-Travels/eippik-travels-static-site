@@ -1,10 +1,130 @@
-<header class="p-4 h-16 w-screen border-2 flex justify-between border-red-400">
-  <span>Logo goes here...</span>
-  <nav>
-    <ul class="flex gap-4">
-      <li><a href="/" class="p-2 link">Home</a></li>
-      <li><a href="/contact" class="p-2 link">Contact</a></li>
-      <li><a href="/about" class="p-2 link">About</a></li>
-    </ul>
-  </nav>
+---
+import Logo from "../images/Logo.astro";
+---
+
+<style>
+  #menu-btn {
+    --menu-bar-width: 24px;
+    --menu-bar-thickness: 3px;
+    --menu-bar-gap: 5px;
+    --actual-gap: calc(var(--menu-bar-gap) + var(--menu-bar-thickness));
+    border: none;
+    padding: 1rem 0.5rem;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  #bars {
+    &,
+    &::before,
+    &::after {
+      position: relative;
+      display: block;
+      width: var(--menu-bar-width);
+      height: var(--menu-bar-thickness);
+      background-color: #22232a;
+      border-radius: 1000px;
+      transition: all ease 300ms;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: var(--actual-gap);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: var(--actual-gap);
+    }
+  }
+
+  #bars.open {
+    background-color: transparent;
+
+    &::before {
+      --transY-distance: var(--actual-gap);
+      transform: translateY(var(--transY-distance)) rotate(45deg) scaleX(1.25);
+    }
+
+    &::after {
+      --transY-distance: calc(-1 * var(--actual-gap));
+      transform: translateY(var(--transY-distance)) rotate(-45deg) scaleX(1.25);
+    }
+  }
+
+  #menu-list {
+    padding: 1rem;
+    position: absolute;
+    top: 4rem;
+    right: 0;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+
+    @media (min-width: theme("screens.sm")) {
+      position: static;
+      top: unset;
+      right: unset;
+      width: auto;
+      flex-direction: row;
+    }
+  }
+
+  #menu-list a {
+    font-size: 1.25rem;
+  }
+</style>
+
+<header class="w-screen">
+  <div
+    class="mx-auto px-4 h-16 md:h-20 w-[min(100%,_1000px)] flex justify-between items-center"
+  >
+    <Logo className="h-12 md:h-16" />
+    <nav>
+      <ul id="menu-list" class="flex gap-4 sr-only sm:not-sr-only">
+        <li><a href="/">Home</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li><a href="/about/">About</a></li>
+      </ul>
+      <button
+        type="button"
+        id="menu-btn"
+        class="sm:hidden"
+        aria-haspopup="menu"
+        aria-label="Open menu"
+        aria-expanded="false"
+      >
+        <div id="bars"></div>
+      </button>
+    </nav>
+  </div>
 </header>
+
+<script>
+  const burgerBtn = document.querySelector<HTMLButtonElement>("#menu-btn")!;
+  const bars = document.querySelector<HTMLDivElement>("#bars")!;
+  const menuList = document.querySelector<HTMLUListElement>("#menu-list")!;
+
+  burgerBtn.addEventListener("click", () => {
+    bars.classList.toggle("open");
+
+    const ariaExpanded = burgerBtn.getAttribute("aria-expanded");
+    if (ariaExpanded === "false") {
+      // Menu is going from CLOSED to OPEN
+      burgerBtn.setAttribute("aria-expanded", "true");
+      burgerBtn.setAttribute("aria-label", "Close menu");
+    } else {
+      // Menu is going from OPEN to CLOSED
+      burgerBtn.setAttribute("aria-expanded", "false");
+      burgerBtn.setAttribute("aria-label", "Open menu");
+    }
+    /**
+     * Logic for showing/hiding
+     * mobile menu goes here...
+     */
+    menuList.classList.toggle("sr-only");
+  });
+</script>
